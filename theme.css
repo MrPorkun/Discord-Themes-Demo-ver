@@ -1,0 +1,86 @@
+/**
+ * @name Neon Breeze
+ * @description เทมเพลตธีมเริ่มต้นแนวไล่สี/นีออน
+ * @author You
+ * @version 1.0.0
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Kanit:wght@400;600;700&display=swap");
+
+:root {
+  --my-accent: #7c5cff;
+  --my-accent-2: #00e0ff;
+  --my-bg-0: #0e0f17;
+  --my-bg-1: #151728;
+  --my-bg-2: #1c1f33;
+  --my-card: #171a2a;
+  --my-text: #e6e8ff;
+  --my-text-dim: #a9afd6;
+  --my-border: #2a2e4a;
+}
+
+.theme-dark, .theme-dark #app-mount {
+  --font-primary: "Kanit", system-ui, sans-serif;
+  --font-display: "Kanit", system-ui, sans-serif;
+
+  --background-primary: var(--my-bg-0);
+  --background-secondary: var(--my-bg-1);
+  --background-tertiary: var(--my-bg-2);
+  --background-floating: var(--my-card);
+  --channeltextarea-background: var(--my-bg-2);
+
+  --text-normal: var(--my-text);
+  --text-muted: var(--my-text-dim);
+
+  --interactive-normal: var(--my-text-dim);
+  --interactive-hover: var(--my-text);
+  --interactive-active: var(--my-text);
+  --interactive-muted: #7a7f9a;
+
+  --brand-experiment: var(--my-accent);
+  --brand-experiment-560: var(--my-accent);
+  --brand-experiment-600: var(--my-accent);
+  --brand-experiment-500: var(--my-accent);
+
+  --background-mentioned: color-mix(in oklab, var(--my-accent) 18%, black);
+  --background-mentioned-hover: color-mix(in oklab, var(--my-accent) 28%, black);
+  --text-link: var(--my-accent-2);
+}
+
+#app-mount::before {
+  content: ""; position: fixed; inset: 0; z-index: -1;
+  background:
+    radial-gradient(80% 60% at 10% 10%, rgba(124,92,255,.15), transparent 60%),
+    radial-gradient(80% 60% at 90% 90%, rgba(0,224,255,.12), transparent 60%),
+    linear-gradient(180deg, #0c0d14 0%, #0e0f17 100%);
+}
+
+/* ตัวอย่างองค์ประกอบยอดฮิต */
+[class*="card"], [class*="popup"], [class*="modal"], [class*="userPopout"] {
+  background: var(--my-card) !important;
+  border: 1px solid var(--my-border);
+  border-radius: 16px;
+}
+
+button[class*="lookFilled"] {
+  background: linear-gradient(90deg, var(--my-accent), var(--my-accent-2)) !important;
+  border: 0 !important; border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(124,92,255,.35);
+}
+
+[class*="message"] [class*="contents"] {
+  background: color-mix(in oklab, var(--my-bg-2) 92%, #000 8%);
+  border: 1px solid var(--my-border);
+  border-radius: 14px; padding: .5rem .75rem;
+}
+
+[class*="mention"] {
+  background: color-mix(in oklab, var(--my-accent) 22%, #000 78%) !important;
+  color: #fff !important; border-radius: 8px; padding: 0 .25rem;
+}
+
+*::-webkit-scrollbar { width: 10px; height: 10px; }
+*::-webkit-scrollbar-thumb {
+  background: color-mix(in oklab, var(--my-accent) 35%, #222 65%);
+  border-radius: 10px; border: 2px solid transparent; background-clip: padding-box;
+}
