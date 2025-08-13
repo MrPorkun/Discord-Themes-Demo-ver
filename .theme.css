@@ -21,16 +21,16 @@
 
   --background-image: url("https://i.postimg.cc/YqLbk5F6/1297123.png"); /* ลิงก์รูปของคุณ */
 
-  --my-accent: #ab09f0;      /* สีหลัก (ปุ่ม/ลิงก์/ไฮไลท์) → แก้ที่นี่เปลี่ยนทั้งธีม */
-  --my-accent-2: #770d9d;    /* สีรอง/ไล่สี → ใช้คู่กับ --my-accent */
+  --my-accent: #be3cf5;      /* สีหลัก (ปุ่ม/ลิงก์/ไฮไลท์) → แก้ที่นี่เปลี่ยนทั้งธีม */
+  --my-accent-2: #c267e4;    /* สีรอง/ไล่สี → ใช้คู่กับ --my-accent */
 
-  --my-bg-0: #39075d;        /* พื้นหลังระดับลึกสุด (หน้าจอหลัก) */
-  --my-bg-1: #52067f;        /* พื้นหลังรอง (sidebar/แผงเมนู) */
-  --my-bg-2: #5e3969;        /* พื้นผิวที่ยกขึ้นเล็กน้อย (กล่อง/อินพุต) */
-  --my-card: #90599b;        /* การ์ด/ป็อปอัป/พื้นผิวลอย */
+  --my-bg-0: #9a45d6;        /* พื้นหลังระดับลึกสุด (หน้าจอหลัก) */
+  --my-bg-1: #9017d7;        /* พื้นหลังรอง (sidebar/แผงเมนู) */
+  --my-bg-2: #3d0a4d;        /* พื้นผิวที่ยกขึ้นเล็กน้อย (กล่อง/อินพุต) */
+  --my-card: #62236f;        /* การ์ด/ป็อปอัป/พื้นผิวลอย */
 
-  --my-text: #6a25a6;        /* สีตัวอักษรหลัก */
-  --my-text-dim: #8128bc;    /* สีตัวอักษรจาง/คำอธิบาย */
+  --my-text: rgb(109, 39, 146);        /* สีตัวอักษรหลัก */
+  --my-text-dim: #8230bd;    /* สีตัวอักษรจาง/คำอธิบาย */
 
   --my-border: #330043;      /* สีเส้นขอบ/แยกส่วน */
 }
@@ -48,7 +48,7 @@
     height: 100%;
     background: url("https://i.postimg.cc/YqLbk5F6/1297123.png");
     background-size: contain;
-    opacity: 0.3; /* ค่าความโปร่งใส */
+    opacity: 0.1; /* ค่าความโปร่งใส */
     pointer-events: none; /* กันไม่ให้บังการกดปุ่ม */
 }
 
@@ -128,11 +128,9 @@ button[class*="lookFilled"]:hover {
 }
 
 /* ====== ฟองแชท (bubble) แบบมีพื้นหลังบาง ๆ ====== */
-[class*="message"] [class*="contents"] {
-  background: color-mix(in oklab, var(--my-bg-2) 92%, #000 8%); /* ผสมสีให้ตื้นขึ้นเล็กน้อย */
-  border: 1px solid var(--my-border);                           /* กำหนดขอบให้เห็นขอบเขตข้อความ */
-  border-radius: 14px; padding: .5rem .75rem;                   /* มุมโค้ง + ช่องว่างภายใน */
-}
+/* [class*="message"] [class*="contents"] {
+
+} */
 
 /* ====== สไตล์ @mention ในข้อความ ====== */
 [class*="mention"] {
@@ -146,5 +144,3 @@ button[class*="lookFilled"]:hover {
   background: color-mix(in oklab, var(--my-accent) 35%, #222 65%); /* สีแท่งเลื่อน */
   border-radius: 10px; border: 2px solid transparent; background-clip: padding-box; /* ขอบมนและมีช่องว่าง */
 }
-
-
