@@ -2,84 +2,117 @@
  * @name Discord Raiden Ei
  * @author BlackinLite
  * @version 1.0.0
+ *  
+ * หมายเหตุ: ส่วนหัว (metadata) นี้ให้ BetterDiscord อ่านชื่อ/ผู้เขียน/เวอร์ชันของธีม
+ * - เปลี่ยนชื่อ/เวอร์ชันได้ตามที่อัปเดตงาน
  */
 
+/* นำเข้าฟอนต์จาก Google Fonts
+ * - ปรับตระกูลฟอนต์หรือน้ำหนัก (wght) ได้
+ * - ถ้าต้องการลดการเรียกเว็บภายนอก สามารถตัดบรรทัดนี้ทิ้งแล้วใช้ system font แทน
+ */
 @import url("https://fonts.googleapis.com/css2?family=Kanit:wght@400;600;700&display=swap");
 
 :root {
-  --my-accent: #7c5cff;
-  --my-accent-2: #00e0ff;
-  --my-bg-0: #0e0f17;
-  --my-bg-1: #151728;
-  --my-bg-2: #1c1f33;
-  --my-card: #171a2a;
-  --my-text: #e6e8ff;
-  --my-text-dim: #a9afd6;
-  --my-border: #2a2e4a;
+  /* ========= Design Tokens ของธีม =========
+   * จุดนี้คือที่รวม "ตัวแปรหลัก" ทั้งหมดของเรา
+   * เวลาอยากปรับโทนสี ให้แก้ค่าที่นี่เป็นหลัก
+   */
+  --my-accent: #7c5cff;      /* สีหลัก (ปุ่ม/ลิงก์/ไฮไลท์) → แก้ที่นี่เปลี่ยนทั้งธีม */
+  --my-accent-2: #00e0ff;    /* สีรอง/ไล่สี → ใช้คู่กับ --my-accent */
+
+  --my-bg-0: #0e0f17;        /* พื้นหลังระดับลึกสุด (หน้าจอหลัก) */
+  --my-bg-1: #151728;        /* พื้นหลังรอง (sidebar/แผงเมนู) */
+  --my-bg-2: #1c1f33;        /* พื้นผิวที่ยกขึ้นเล็กน้อย (กล่อง/อินพุต) */
+  --my-card: #171a2a;        /* การ์ด/ป็อปอัป/พื้นผิวลอย */
+
+  --my-text: #e6e8ff;        /* สีตัวอักษรหลัก */
+  --my-text-dim: #a9afd6;    /* สีตัวอักษรจาง/คำอธิบาย */
+
+  --my-border: #2a2e4a;      /* สีเส้นขอบ/แยกส่วน */
 }
 
+/* ====== แม็พตัวแปรของเรา ไปยังตัวแปรภายในของ Discord (โหมดมืด) ====== */
 .theme-dark, .theme-dark #app-mount {
-  --font-primary: "Kanit", system-ui, sans-serif;
-  --font-display: "Kanit", system-ui, sans-serif;
+  /* ฟอนต์รวมของระบบ → เปลี่ยนได้ที่ import ด้านบนและที่นี่ */
+  --font-primary: "Kanit", system-ui, sans-serif;  /* ฟอนต์เนื้อความ */
+  --font-display: "Kanit", system-ui, sans-serif;  /* ฟอนต์หัวข้อ/องค์ประกอบเด่น */
 
-  --background-primary: var(--my-bg-0);
-  --background-secondary: var(--my-bg-1);
-  --background-tertiary: var(--my-bg-2);
-  --background-floating: var(--my-card);
-  --channeltextarea-background: var(--my-bg-2);
+  /* พื้นหลังชั้นต่าง ๆ ของ Discord → ผูกกับตัวแปรของเรา */
+  --background-primary: var(--my-bg-0);       /* ฉากหลังหน้าจอสนทนา */
+  --background-secondary: var(--my-bg-1);     /* แถบด้านข้าง/รายการ */
+  --background-tertiary: var(--my-bg-2);      /* ผิวรอง/คั่นระดับ */
+  --background-floating: var(--my-card);      /* ป็อปอัป/เมนูลอย */
+  --channeltextarea-background: var(--my-bg-2); /* พื้นหลังกล่องพิมพ์ */
 
-  --text-normal: var(--my-text);
-  --text-muted: var(--my-text-dim);
+  /* สีตัวอักษรหลัก/รอง */
+  --text-normal: var(--my-text);              /* เนื้อความ */
+  --text-muted: var(--my-text-dim);           /* คำอธิบาย/จาง */
 
+  /* สี interactive (ปุ่ม/ไอคอน/โฮเวอร์) */
   --interactive-normal: var(--my-text-dim);
   --interactive-hover: var(--my-text);
   --interactive-active: var(--my-text);
-  --interactive-muted: #7a7f9a;
+  --interactive-muted: #7a7f9a;               /* ปิดใช้งาน/disabled */
 
-  --brand-experiment: var(--my-accent);
+  /* โทนแบรนด์ของ Discord (ใช้เยอะมาก) → ผูกกับสีหลักเรา */
+  --brand-experiment: var(--my-accent);       /* ปุ่มหลัก/สวิตช์/ลิงก์สำคัญ */
   --brand-experiment-560: var(--my-accent);
   --brand-experiment-600: var(--my-accent);
   --brand-experiment-500: var(--my-accent);
 
+  /* สีพื้นหลังเวลาโดน @mention หรือ hover ที่ mention */
+  /* หมายเหตุ: color-mix ต้องการ Chromium/Electron รุ่นค่อนข้างใหม่ */
   --background-mentioned: color-mix(in oklab, var(--my-accent) 18%, black);
   --background-mentioned-hover: color-mix(in oklab, var(--my-accent) 28%, black);
+
+  /* สีลิงก์ */
   --text-link: var(--my-accent-2);
 }
 
+/* ====== พื้นหลังรวมของแอป (เลเยอร์ด้านหลังสุด) ====== */
 #app-mount::before {
-  content: ""; position: fixed; inset: 0; z-index: -1;
+  content: ""; position: fixed; inset: 0; z-index: -1; /* ครอบเต็มหน้าจอและอยู่หลังทุกอย่าง */
+  /* กราเดียนต์สองก้อน + ไล่สีแนวตั้ง → ให้มิติแบบนีออน */
   background:
     radial-gradient(80% 60% at 10% 10%, rgba(124,92,255,.15), transparent 60%),
     radial-gradient(80% 60% at 90% 90%, rgba(0,224,255,.12), transparent 60%),
     linear-gradient(180deg, #0c0d14 0%, #0e0f17 100%);
 }
 
-/* ตัวอย่างองค์ประกอบยอดฮิต */
+/* ====== ปรับโทนการ์ด/ป็อปอัป/โมดอล/โปรไฟล์ลอย ให้ไปในทางเดียวกัน ====== */
 [class*="card"], [class*="popup"], [class*="modal"], [class*="userPopout"] {
-  background: var(--my-card) !important;
-  border: 1px solid var(--my-border);
-  border-radius: 16px;
+  background: var(--my-card) !important;  /* สีผิวการ์ด */
+  border: 1px solid var(--my-border);     /* เส้นขอบบาง ๆ เพิ่มโครง */
+  border-radius: 16px;                     /* มุมโค้งนุ่มนวล */
 }
 
+/* ====== ปุ่มหลักแบบไล่สี (filled buttons) ====== */
 button[class*="lookFilled"] {
-  background: linear-gradient(90deg, var(--my-accent), var(--my-accent-2)) !important;
-  border: 0 !important; border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(124,92,255,.35);
+  background: linear-gradient(90deg, var(--my-accent), var(--my-accent-2)) !important; /* ไล่สีหลัก */
+  border: 0 !important; border-radius: 12px; /* ตัดเส้นขอบเดิมและทำมุมโค้ง */
+  box-shadow: 0 6px 18px rgba(124,92,255,.35); /* เงาเรืองรองเล็กน้อย */
+}
+button[class*="lookFilled"]:hover {
+  transform: translateY(-1px); /* โฮเวอร์แล้วยกขึ้นนิด ๆ รู้สึกคลิกได้ */
 }
 
+/* ====== ฟองแชท (bubble) แบบมีพื้นหลังบาง ๆ ====== */
 [class*="message"] [class*="contents"] {
-  background: color-mix(in oklab, var(--my-bg-2) 92%, #000 8%);
-  border: 1px solid var(--my-border);
-  border-radius: 14px; padding: .5rem .75rem;
+  background: color-mix(in oklab, var(--my-bg-2) 92%, #000 8%); /* ผสมสีให้ตื้นขึ้นเล็กน้อย */
+  border: 1px solid var(--my-border);                           /* กำหนดขอบให้เห็นขอบเขตข้อความ */
+  border-radius: 14px; padding: .5rem .75rem;                   /* มุมโค้ง + ช่องว่างภายใน */
 }
 
+/* ====== สไตล์ @mention ในข้อความ ====== */
 [class*="mention"] {
-  background: color-mix(in oklab, var(--my-accent) 22%, #000 78%) !important;
-  color: #fff !important; border-radius: 8px; padding: 0 .25rem;
+  background: color-mix(in oklab, var(--my-accent) 22%, #000 78%) !important; /* แท็บไฮไลท์ */
+  color: #fff !important; border-radius: 8px; padding: 0 .25rem;              /* อ่านง่ายและไม่แหลมคมเกินไป */
 }
 
-*::-webkit-scrollbar { width: 10px; height: 10px; }
+/* ====== สกอลบาร์ (เฉพาะเอนจิน WebKit/Chromium ที่ Discord ใช้) ====== */
+*::-webkit-scrollbar { width: 10px; height: 10px; }      /* ความกว้าง/สูงของแทร็ก */
 *::-webkit-scrollbar-thumb {
-  background: color-mix(in oklab, var(--my-accent) 35%, #222 65%);
-  border-radius: 10px; border: 2px solid transparent; background-clip: padding-box;
+  background: color-mix(in oklab, var(--my-accent) 35%, #222 65%); /* สีแท่งเลื่อน */
+  border-radius: 10px; border: 2px solid transparent; background-clip: padding-box; /* ขอบมนและมีช่องว่าง */
 }
